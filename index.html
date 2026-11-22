@@ -475,7 +475,7 @@ header .panel .tabs button.on{z-index:10}
 @media (min-width:900px){
   header .panel{padding:0;margin:0;min-height:0;height:0;border:0;background:none;box-shadow:none}
   header .panel h1{display:none}
-  header .panel .tabs{position:fixed;left:0;right:0;top:14px;bottom:auto;width:max-content;max-width:calc(100vw - 48px);margin:0 auto;padding:7px;display:flex;align-items:stretch;gap:4px;background:rgba(17,17,17,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:28px;box-shadow:0 12px 34px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.35);overflow:visible;z-index:60}
+  header .panel .tabs{position:fixed;left:0;right:0;top:0;bottom:auto;width:100%;max-width:none;margin:0;padding:10px 24px 12px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:stretch;column-gap:8px;background:rgba(17,17,17,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:0;border-bottom:1px solid rgba(255,255,255,.14);border-radius:0 0 28px 28px;box-shadow:0 12px 34px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.35);overflow:visible;z-index:60}
   header .panel .tabs button svg{display:none!important}
   header .panel .tabs button[data-t],header .panel .tabs button[data-t].on,header .panel .tabs button[data-t]:first-child{position:relative;z-index:1;flex:1 1 auto;min-height:46px;margin:0;padding:0 24px;border:0;border-radius:22px;background:transparent;color:rgba(255,255,255,.66);font-weight:800;font-size:.92rem;white-space:nowrap;box-shadow:none;filter:none;transition:color .2s}
   header .panel .tabs button[data-t]:hover{color:#fff;filter:none}
@@ -489,8 +489,27 @@ header .panel .tabs button.on{z-index:10}
   header .panel .tabs .gearbtn svg{display:block!important;width:18px;height:auto;max-height:30px}
   .mbbar,.tab-exp .mbbar{border-radius:22px}
   .tab-exp .mbbar{display:none}
-  body{padding-top:84px;padding-bottom:0}
+  header .panel .tabs button:nth-child(1),header .panel .tabs button:nth-child(2),header .panel .tabs button:nth-child(4){grid-column:span 2}
+  header .panel .tabs button:nth-child(3){grid-column:span 3}
+  header .panel .tabs .finbtn{grid-column:span 2}
+  header .panel .tabs .gearbtn{grid-column:span 1}
+  header .panel .tabs button[data-t],header .panel .tabs button[data-t].on,header .panel .tabs button[data-t]:first-child{padding:0 8px;display:flex;align-items:center;justify-content:center;text-align:center}
+  header .panel .tabs .finbtn{padding:0 8px}
+  header .panel .tabs .gearbtn{flex:none;width:auto}
+  /* grid de 12 columnas para todo el contenido */
+  main,.exgrid,.exgrid.vert,.qpane,.subtabs{max-width:none}
+  main{padding-left:24px;padding-right:24px}
+  .dia{padding-left:0!important;padding-right:0!important;grid-template-columns:repeat(12,minmax(0,1fr))!important;column-gap:12px}
+  .dstep{grid-column:span 4}
+  .grid,.grid.land{column-gap:12px}
+  .grid,.grid.land{--cols:3}
+  .card{margin-bottom:12px}
+  .exgrid,.exgrid.vert{column-gap:12px;padding-left:0;padding-right:0}
+  body{padding-top:88px;padding-bottom:0}
 }
+@media (min-width:1280px){ .grid,.grid.land{--cols:4} .exgrid,.exgrid.vert{column-count:4} }
+@media (min-width:1700px){ .grid,.grid.land{--cols:6} .exgrid,.exgrid.vert{column-count:6} }
+@media (min-width:900px) and (max-width:1279px){ .exgrid,.exgrid.vert{column-count:3} }
 
 /* subpestañas de Reels */
 .subtabs{display:flex;gap:8px;padding:12px 12px 4px;max-width:2000px;margin:0 auto}
