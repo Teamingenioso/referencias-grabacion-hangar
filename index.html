@@ -530,6 +530,19 @@ header .panel .tabs button.on{z-index:10}
 .ctags .eq{position:static;display:contents}
 .ctags .eq i{font-size:.6rem;padding:3px 8px}
 .ctags .iatag{position:static;font-size:.6rem}
+
+/* etiquetas optimizadas: una sola línea, máx. 3 + contador */
+.ctags{flex-wrap:wrap;gap:4px 5px}
+.ctags .ch{font-style:normal;flex:none;white-space:nowrap;border-radius:999px;font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;line-height:1.2}
+.ctags .ch.ia{background:var(--yellow);color:#000}
+.ctags .ch.ce{border:1px solid var(--yellow);color:var(--yellow)}
+.ctags .ch.tg{border:1px solid rgba(255,255,255,.4);color:#fff}
+.ctags .ch.mo{background:rgba(255,255,255,.14);color:#fff;padding:3px 7px}
+.card.iaok .ctags .ch.ia{background:#fff}
+@media (min-width:900px){
+  header .panel .tabs{left:16px;right:16px;top:12px;width:auto;border:1px solid rgba(255,255,255,.14);border-radius:28px;padding:8px 14px}
+  body{padding-top:92px}
+}
 </style>
 </head>
 <body>
@@ -975,7 +988,11 @@ function render(){
     var cap=document.createElement('div'); cap.className='cap';
     var s=document.createElement('span'); s.className='esc'; s.textContent=c.tec||c.esc||c.eti; cap.appendChild(s);
     if(c.from!=null){var r=document.createElement('span'); r.className='rng'; r.textContent='Tramo '+fmt(c.from)+' a '+fmt(c.to); cap.appendChild(r)}
-    if(typeof eqEl!=='undefined'&&c.eq.length||typeof itEl!=='undefined'&&c.ia){ var tg=document.createElement('div'); tg.className='ctags'; if(c.ia&&itEl) tg.appendChild(itEl); if(c.eq.length&&eqEl) tg.appendChild(eqEl); cap.appendChild(tg) }
+    var chips=[]; if(c.ia) chips.push(['BASE IA','ia']); (c.tags||[]).forEach(function(x){ if(c.ia&&/^ia$/i.test(x)) return; chips.push([x,'tg']) }); c.eq.forEach(function(x){chips.push([x,'ce'])});
+    if(chips.length){ var tg=document.createElement('div'); tg.className='ctags'; var MAXC=window.innerWidth<640?2:3;
+      chips.slice(0,MAXC).forEach(function(x){ var i3=document.createElement('i'); i3.className='ch '+x[1]; i3.textContent=x[0]; tg.appendChild(i3) });
+      if(chips.length>MAXC){ var mo=document.createElement('i'); mo.className='ch mo'; mo.textContent='+'+(chips.length-MAXC); mo.title=chips.slice(MAXC).map(function(x){return x[0]}).join(', '); tg.appendChild(mo) }
+      cap.appendChild(tg) }
     card.appendChild(vid); card.appendChild(cap);
     var open=function(){openViewer(i)};
     card.addEventListener('click',open);
