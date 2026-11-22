@@ -471,6 +471,20 @@ header .panel .tabs button.on{z-index:10}
 .exgrid.vert .exc video{aspect-ratio:auto}
 .exc .lk{min-height:120px}
 @media (max-width:899px){ .dstep{padding:7px 8px;gap:6px} .dn{width:20px;height:20px;font-size:.7rem} .dt b{font-size:.78rem!important;line-height:1.1;overflow-wrap:anywhere} .dt em{font-size:.66rem} }
+/* ===== Panel flotante de celular: solo texto, con Finalizado e isotipo ===== */
+@media (max-width:899px){
+  header .panel .tabs{max-width:520px;gap:2px;padding:6px}
+  header .panel .tabs button[data-t] svg{display:none!important}
+  header .panel .tabs button[data-t]{flex:1 1 auto;min-width:0;flex-direction:row;font-size:.7rem;letter-spacing:-.02em;white-space:nowrap;padding:0 6px;min-height:46px}
+  @media (max-width:380px){header .panel .tabs button[data-t],header .panel .tabs .finbtn{font-size:.64rem;padding:0 4px!important}header .panel .tabs{padding:5px;gap:0}}
+  header .panel .tabs button[data-t] span{font-size:inherit}
+  header .panel .tabs button[data-t].on{background:transparent;color:#000}
+  header .panel .tabs .finbtn{display:flex!important;flex:1 1 auto;min-width:0;margin:0!important;min-height:46px;padding:0 6px;border-radius:20px;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;white-space:nowrap;background:transparent;border:0;color:rgba(255,255,255,.38);opacity:1;box-shadow:none}
+  header .panel .tabs .finbtn:not(:disabled){background:#22c55e;color:#04210f;box-shadow:0 0 16px rgba(34,197,94,.5),0 0 2px rgba(34,197,94,.8)}
+  header .panel .tabs .gearbtn{display:flex;flex:0 0 36px;margin:0!important;min-height:46px;padding:0!important;min-width:0;align-items:center;justify-content:center;border-radius:20px;background:transparent;border:0}
+  header .panel .tabs .gearbtn svg{display:block!important;width:16px;height:auto;max-height:26px}
+  header .panel .tabs .finbtn{margin-left:0}
+}
 </style>
 </head>
 <body>
@@ -1090,13 +1104,13 @@ load();
   }
   function ui(){ GAL.forEach(paint) }
   function setTab(t){ mood.hidden=t!=='mood'; GAL.forEach(function(g){ g.main.hidden=g.k!==t }); document.body.classList.toggle('tab-exp',t!=='mood');
-    [].forEach.call(tabsEl.querySelectorAll('button'),function(b){ var on=b.getAttribute('data-t')===t; b.classList.toggle('on',on); b.setAttribute('aria-selected',String(on)) });
+    [].forEach.call(tabsEl.querySelectorAll('button[data-t]'),function(b){ var on=b.getAttribute('data-t')===t; b.classList.toggle('on',on); b.setAttribute('aria-selected',String(on)) });
     var pt=document.getElementById('ptitle'); if(pt){ var bb=tabsEl.querySelector('[data-t="'+t+'"]'); if(bb) pt.textContent=bb.getAttribute('aria-label') }
     try{localStorage.setItem('rec_tab',t)}catch(x){} window.scrollTo(0,0); posInd(true) }
-  function posInd(anim){ var on=tabsEl.querySelector('button.on'); if(!on) return; tabsEl.style.setProperty('--ix',on.offsetLeft+'px'); tabsEl.style.setProperty('--iw',on.offsetWidth+'px'); tabsEl.style.setProperty('--ih',on.offsetHeight+'px'); tabsEl.style.setProperty('--iy',on.offsetTop+'px');
+  window.posInd=posInd; function posInd(anim){ var on=tabsEl.querySelector('button[data-t].on'); if(!on) return; tabsEl.style.setProperty('--ix',on.offsetLeft+'px'); tabsEl.style.setProperty('--iw',on.offsetWidth+'px'); tabsEl.style.setProperty('--ih',on.offsetHeight+'px'); tabsEl.style.setProperty('--iy',on.offsetTop+'px');
     if(anim){ tabsEl.classList.remove('liq'); void tabsEl.offsetWidth; tabsEl.classList.add('liq'); clearTimeout(posInd._t); posInd._t=setTimeout(function(){ tabsEl.classList.remove('liq') },650) } }
   window.addEventListener('resize',function(){ posInd(false) }); setTimeout(function(){ posInd(false) },60); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ posInd(false) });
-  tabsEl.addEventListener('click',function(ev){ var b=ev.target.closest('button'); if(b) setTab(b.getAttribute('data-t')) });
+  tabsEl.addEventListener('click',function(ev){ var b=ev.target.closest('button[data-t]'); if(b) setTab(b.getAttribute('data-t')) });
   var t0='mood'; try{ var sv=localStorage.getItem('rec_tab'); if(sv&&(sv==='mood'||panes[sv])) t0=sv }catch(x){} setTab(t0); ui();
   if(window.claude&&window.claude.use){
     window.claude.use('assets').then(function(a){ api=a; ui() }).catch(function(){});
@@ -1106,7 +1120,7 @@ load();
 })();
 
 (function(){ var mq=window.matchMedia('(max-width:899px)'), panel=document.querySelector('.panel'), tools=document.querySelector('.tools'), seg=document.getElementById('seg'), g=document.getElementById('gearbtn'), f=document.getElementById('finbtn');
-  function place(){ if(mq.matches){ tools.insertBefore(f,seg); seg.insertAdjacentElement('afterend',g) } else { panel.appendChild(f); panel.appendChild(g) } }
+  var tb=document.getElementById('tabs'); function place(){ if(mq.matches){ tb.appendChild(f); tb.appendChild(g) } else { panel.appendChild(f); panel.appendChild(g) } if(window.posInd) window.posInd(false) }
   place(); if(mq.addEventListener) mq.addEventListener('change',place); else if(mq.addListener) mq.addListener(place);
 })();
 </script>
