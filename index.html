@@ -1,5 +1,9 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0a0a0a">
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
 
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="theme-color" content="#0a0a0a">
@@ -409,9 +413,9 @@ header{padding-top:max(8px,env(safe-area-inset-top,0px));padding-bottom:8px}
 }
 @media (min-width:900px){ .panel .gearbtn{margin-left:0} }
 /* ===== Pestañas tipo folder ===== */
-:root{--sheet:#171717;--yel:#f5d400}
+:root{--sheet:#171717;--yel:#f5d400;--taboff:#2a2a2a}
 header .panel .tabs button::before,header .panel .tabs button::after{content:none}
-header .panel .tabs button.on::before,header .panel .tabs button.on::after{content:'';position:absolute;bottom:0;width:18px;height:18px;pointer-events:none}
+header .panel .tabs button.on::before,header .panel .tabs button.on::after{content:none;position:absolute;bottom:0;width:18px;height:18px;pointer-events:none}
 header .panel .tabs button.on::before{left:-18px;background:radial-gradient(circle at 0 0,transparent 17.5px,var(--sheet) 18px)}
 header .panel .tabs button.on::after{right:-18px;background:radial-gradient(circle at 100% 0,transparent 17.5px,var(--sheet) 18px)}
 header .panel .tabs button:first-child.on::before{display:none}
@@ -420,26 +424,56 @@ header .panel .tabs button.on{z-index:10}
 @media (min-width:900px){
   header .panel{padding:0;border:0;background:none;box-shadow:none;border-radius:0;align-items:flex-end;gap:10px;margin:0}
   header .panel .tabs{display:flex;gap:0;padding:0;background:none;border:0;box-shadow:none;overflow:visible;align-items:flex-end;margin-right:auto;border-radius:0}
-  header .panel .tabs button{position:relative;flex:none;min-height:46px;padding:0 36px;margin-left:-16px;border:0;border-radius:18px 18px 0 0;background:var(--yel);color:#000;font-weight:800;font-size:.95rem;box-shadow:none;transition:min-height .15s}
+  header .panel .tabs button{position:relative;flex:none;min-height:46px;padding:0 36px;margin-left:-16px;border:0;border-radius:18px 18px 0 0;background:var(--taboff);color:#fff;font-weight:800;font-size:.95rem;box-shadow:none;transition:min-height .15s}
   header .panel .tabs button:first-child{margin-left:0}
-  header .panel .tabs button:hover{color:#000;filter:brightness(1.06)}
-  header .panel .tabs button.on{min-height:54px;background:var(--sheet);color:#fff;box-shadow:none;filter:none}
+  header .panel .tabs button:hover{color:#fff;filter:brightness(1.25)}
+  header .panel .tabs button.on{min-height:54px;background:var(--yel);color:#000;box-shadow:none;filter:none}
   header .panel .finbtn,header .panel .gearbtn{margin-bottom:8px}
   .mbbar{background:var(--sheet);border-radius:0 22px 22px 22px;padding:12px 14px}
   .tab-exp .mbbar{display:block;min-height:14px;padding:0;height:14px}
   .tab-exp .mbbar>*{display:none}
 }
 @media (max-width:899px){
-  header .panel .tabs{left:0;right:0;bottom:0;max-width:none;width:auto;margin:0;padding:0 12px calc(14px + env(safe-area-inset-bottom,0px));background:none;border:0;border-radius:0;box-shadow:none;overflow:visible;align-items:flex-end;gap:0}
-  header .panel .tabs::before{content:'';position:absolute;left:0;right:0;bottom:0;height:calc(14px + env(safe-area-inset-bottom,0px));background:var(--sheet);border-top:1px solid rgba(255,255,255,.14);z-index:0}
-  header .panel .tabs button{position:relative;flex:1 1 0;min-height:46px;margin-left:-10px;padding:0 10px;border:0;border-radius:16px 16px 0 0;background:var(--yel);color:#000;box-shadow:none;justify-content:center}
-  header .panel .tabs button:first-child{margin-left:0}
-  header .panel .tabs button.on{flex:2.4 1 0;min-height:54px;background:var(--sheet);color:#fff;margin-bottom:-1px;box-shadow:none}
-  header .panel .tabs button.on svg{filter:none;color:var(--yel)}
-  body{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  header .panel .tabs{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:480px;width:auto;margin:0 auto;padding:6px;background:rgba(17,17,17,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:26px;box-shadow:0 10px 30px rgba(0,0,0,.45),0 2px 8px rgba(0,0,0,.35);overflow:visible;align-items:stretch;gap:4px}
+  header .panel .tabs button,header .panel .tabs button.on,header .panel .tabs button:first-child{position:relative;flex:1 1 0;min-height:52px;margin:0;padding:6px 4px;border:0;border-radius:20px;background:transparent;color:rgba(255,255,255,.62);box-shadow:none;filter:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:.68rem;font-weight:700}
+  header .panel .tabs button span{display:block!important;font-size:.68rem}
+  header .panel .tabs button svg{display:block!important;width:22px;height:22px;color:inherit;filter:none}
+  header .panel .tabs button{z-index:1!important}
+  header .panel .tabs button.on{color:#000;background:transparent}
+  header .panel .tabs::before{content:'';position:absolute;left:0;top:0;width:var(--iw,0);height:var(--ih,0);transform:translate(var(--ix,0),var(--iy,0));border-radius:20px;background:var(--yel);box-shadow:0 0 18px rgba(245,212,0,.55),0 0 4px rgba(245,212,0,.6);transition:transform .55s cubic-bezier(.34,1.45,.5,1),width .55s cubic-bezier(.34,1.45,.5,1),height .3s;z-index:0;pointer-events:none}
+  header .panel .tabs.liq::before{animation:liqsq .55s ease-in-out}
+  @keyframes liqsq{0%{filter:blur(0)}35%{filter:blur(2.5px);box-shadow:0 0 30px rgba(245,212,0,.8),0 0 8px rgba(245,212,0,.7);border-radius:26px}100%{filter:blur(0)}}
+  header .panel .tabs button.on svg{color:#000}
+  header .panel .tabs button.on::before,header .panel .tabs button.on::after{content:none!important}
+  body{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 }
+/* etapas compactas */
+.dia,.dia{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px;padding:10px 12px 0}
+.dstep{padding:8px 14px;gap:10px;border-radius:14px;align-items:center!important;flex-direction:row!important}
+.dn{width:24px;height:24px;font-size:.78rem}
+.dt{flex-direction:row;align-items:baseline;gap:10px}
+.dt b{font-size:.95rem!important}
+.dt em{font-size:.75rem;margin:0}
+@media (max-width:899px){ .dia{grid-auto-flow:row!important;overflow:visible!important;padding:10px 10px 0} .dstep{padding:8px 10px;gap:8px} .dt{flex-direction:column;gap:1px} }
+/* ===== Estilo moodboard: mosaico que se ajusta al tamaño de cada archivo ===== */
+.grid,.grid.land{column-count:var(--cols);column-gap:8px}
+.grid.land{--cols:2}
+@media (min-width:900px){.grid.land{--cols:3}}
+@media (min-width:1280px){.grid.land{--cols:4}}
+@media (min-width:1700px){.grid.land{--cols:5}}
+.card{margin:0 0 8px}
+.exgrid,.exgrid.vert{display:block;column-count:2;column-gap:10px;max-width:2000px;padding:6px 10px 28px}
+@media (min-width:700px){.exgrid,.exgrid.vert{column-count:3}}
+@media (min-width:1100px){.exgrid,.exgrid.vert{column-count:4}}
+@media (min-width:1600px){.exgrid,.exgrid.vert{column-count:5}}
+.exc{break-inside:avoid;margin:0 0 10px;display:block;width:100%}
+.exc video,.exc img{max-height:none;height:auto}
+.exgrid.vert .exc video{aspect-ratio:auto}
+.exc .lk{min-height:120px}
+@media (max-width:899px){ .dstep{padding:7px 8px;gap:6px} .dn{width:20px;height:20px;font-size:.7rem} .dt b{font-size:.78rem!important;line-height:1.1;overflow-wrap:anywhere} .dt em{font-size:.66rem} }
 </style>
-</head><body>
+</head>
+<body>
 
 
 <header>
@@ -516,12 +550,13 @@ header .panel .tabs button.on{z-index:10}
 archivo,escena,etiqueta,descripcion,tecnica,accion,equipo,fuente,tags,ia,desde,hasta,quien,tomas,puesto
 Grajper_-_Bolt_Cam.gif,After running · Espacio de fotos,Bolt Cam,"Un clip por cada grupo de personas que se toma fotos, mirando al frente como si hubiera una cámara ahí. En cada clip se cambia el ángulo de la cámara; el movimiento se hace en edición.",Bolt cam,Se toman fotos mirando al frente,Action 5 / Tripié,https://eyecannndy.com/technique/bolt-cam,,,,,,5,After running (cobertura libre)
 Wes_Anderson_-_1960s.gif,Carrera · meta|After running · Espacio de fotos|After running · Premiación|After running · Casita de Bad Bunny,Bullet Time,Congelar el momento mientras la cámara gira alrededor.,Bullet time,,ZV-E10 / a6700 / Canon,https://eyecannndy.com/technique/bullet-time,IA,Grabar un clip general del espacio con una cámara normal (plano abierto) para usarlo como referencia al crear el clip con IA.,,,,1,Entrada · salida · meta (filmmakers 1 y 2)|After running (cobertura libre)
-Mount_Defiance_-_Camera_Roll.gif,Calentamiento|Carrera · salida,Camera Roll,Escena que se replica con un RP o corredor haciendo una acción puntual.,Camera roll,Ponerse gafas / beber agua / sacar una selfie,ZV-E10,https://eyecannndy.com/technique/camera-roll,,,,,,1,Entrada · salida · meta (filmmakers 1 y 2)
+Mount_Defiance_-_Camera_Roll.gif,Calentamiento|Carrera · salida,Camera Roll,Escena que se replica con un RP o corredor haciendo una acción puntual. Se graba con baja obturación.,Camera roll,Ponerse gafas / beber agua / sacar una selfie,ZV-E10,https://eyecannndy.com/technique/camera-roll,Baja obturación,,,,,1,Entrada · salida · meta (filmmakers 1 y 2)
 James_Dayton_-_Close-Up.gif,Calentamiento,Close-Up,Primer plano de alguien calentando: cámara muy cerca de la persona mientras hace el calentamiento.,Close-up,Calentando,a6700,,,,,,,1,Entrada · salida · meta (filmmakers 1 y 2)
 Emil_Nava_-_Bolt_Cam.gif,Carrera · salida,Bolt Cam · Salida de la carrera,"Dos clips del mero inicio de la carrera para generar la escena con IA. Primero uno de frente, general, con un dolly como si te acercaras a la gente en la línea de salida. Después uno desde atrás, como la primera persona de alguien en la salida (puede ser un RP o modelo, o simplemente un filmmaker), que muestre a las personas adelante y la pantalla de salida con la cuenta regresiva.",Bolt cam,Gente en la línea de salida frente a la pantalla con la cuenta regresiva,,https://eyecannndy.com/technique/bolt-cam#salida,IA|Salida,"Estos dos clips son la base para generar la escena con IA: uno de frente acercándose (dolly) y otro desde atrás mostrando la pantalla y la cuenta regresiva. Basta con un filmmaker, no hace falta modelo.",,,Filmmakers 1 y 2,2,Entrada · salida · meta (filmmakers 1 y 2)
 David_Aufdembrinke_-_Dolly.gif,Calentamiento|Carrera · salida|Carrera · vuelta|After running · Espacio de fotos|After running · Casita de Bad Bunny,Dolly · Logo de Hangar,"Un dolly que avanza por un entorno y se frena justo donde aparece el logo de Hangar. Se repite en distintos entornos del evento con el logo a la misma distancia y en el centro del encuadre, para unir las tomas en edición con un match cut.",Dolly,Avanzar y frenar justo frente al logo de Hangar,,,Match cut|Logo Hangar,,,,,3,
-Jessy_Busgeeth_-_Collage.gif,Carrera · salida|Carrera · vuelta|Carrera · meta,Collage,"Alguien corriendo, grabado desde la parte de la carrera, ya sea a la mitad o en la meta.",Collage,Corriendo,,,5K|10K,,,,Quien esté en la carrera (5K o 10K),10,Entrada · salida · meta (filmmakers 1 y 2)|Vuelta (filmmaker 3)
-Mattias_Russo-Larsson_-_Collage.gif,Carrera · salida|Carrera · vuelta,Collage · fotos al azar,"Fotos al azar en varios puntos, al inicio o a la mitad de la carrera, para tener este resultado.",Collage,Se toma fotos en distintos lugares,Canon,,,,,,Juan Corzo,1,
+Alex_Hulsey_-_Fast_Motion.gif,Carrera · salida|Carrera · meta|After running · Espacio de fotos|After running · Comida|After running · Premiación|After running · Casita de Bad Bunny,Timelapse · Ángulo alto,"Timelapse desde un ángulo alto, donde se vea a la gente moviéndose. Mínimo 5 clips, cada uno en un espacio diferente del evento.",Fast motion,Gente moviéndose vista desde arriba,,,Timelapse|Ángulo alto,,,,,5,
+Jessy_Busgeeth_-_Collage.gif,Carrera · salida|Carrera · vuelta|Carrera · meta,Collage,"Alguien corriendo, grabado desde la parte de la carrera, ya sea a la mitad o en la meta. Un solo clip, grabado con baja obturación.",Collage,Corriendo,,,5K|10K|Baja obturación,,,,Quien esté en la carrera (5K o 10K),1,Entrada · salida · meta (filmmakers 1 y 2)|Vuelta (filmmaker 3)
+Mattias_Russo-Larsson_-_Collage.gif,Carrera · salida|Carrera · vuelta,Collage · fotos al azar,"Fotos al azar en varios puntos, al inicio o a la mitad de la carrera, para tener este resultado.",Collage,Se toma fotos en distintos lugares,Canon,,,,,,Juan Corzo,10,
 </script>
 <script>
 (function(){
@@ -771,14 +806,15 @@ function paintChips(){
 
 /* ---- Orden del día (también filtra) ---- */
 var DIA=[
-  {g:'Calentamiento',t:'Calentamiento',n:'Arranca el evento.'},
-  {g:'Carrera',t:'Carrera 5K y 10K',n:'3 filmmakers: 2 en la entrada (que también es salida y meta) y 1 en la vuelta.'},
-  {g:'After running',t:'After running',n:'Espacio de fotos, comida, premiación, casita de Bad Bunny y más.'}
+  {g:'Calentamiento',t:'Calentamiento',m:['Calentamiento']},
+  {g:'La carrera',t:'La carrera',m:['Carrera']},
+  {g:'After running',t:'After running',m:['After running']}
 ];
+function inGrp(c,d){ return c.escs.some(function(e){ return d.m.indexOf(e.split(' · ')[0])>-1 }) }
 function paintDia(){
   var box=document.getElementById('dia'); if(!box) return; box.innerHTML='';
   DIA.forEach(function(d,i){
-    var n=clips.filter(function(c){return c.escs.some(function(e){return e.split(' · ')[0]===d.g})}).length;
+    var n=clips.filter(function(c){return inGrp(c,d)}).length;
     var b=document.createElement('button'); b.type='button'; b.className='dstep'+(grp===d.g?' on':''); b.setAttribute('aria-pressed',String(grp===d.g));
     var nb=document.createElement('span'); nb.className='dn'; nb.textContent=i+1; var tx=document.createElement('span'); tx.className='dt';
     var t=document.createElement('b'); t.textContent=d.t; var p=document.createElement('small'); p.textContent=d.n; var k=document.createElement('em'); k.textContent=n+(n===1?' referencia':' referencias');
@@ -848,7 +884,7 @@ function render(){
   var q=norm(query);
   shown=clips.filter(function(c){
     return FDEF.every(function(d){ return !F[d.k]||d.get(c).some(function(v){return norm(v)===F[d.k]}) })
-      &&(!grp||c.escs.some(function(e){return e.split(' · ')[0]===grp}))
+      &&(!grp||inGrp(c,DIA.filter(function(d){return d.g===grp})[0]||{m:[]}))
       &&(est==='Todos'||(est==='Pendientes'?!isDone(c):isDone(c)))
       &&(!q||norm([c.esc,c.pues.join(' '),c.eti,c.desc,c.tec,c.file,c.eq.join(' '),c.tags.join(' '),c.acc,(c.ia?'ia':''),owners(c).join(' ')].join(' ')).indexOf(q)>-1) });
   [].forEach.call(grid.querySelectorAll('video'),function(v){near.unobserve(v);far.unobserve(v)});
@@ -1056,7 +1092,10 @@ load();
   function setTab(t){ mood.hidden=t!=='mood'; GAL.forEach(function(g){ g.main.hidden=g.k!==t }); document.body.classList.toggle('tab-exp',t!=='mood');
     [].forEach.call(tabsEl.querySelectorAll('button'),function(b){ var on=b.getAttribute('data-t')===t; b.classList.toggle('on',on); b.setAttribute('aria-selected',String(on)) });
     var pt=document.getElementById('ptitle'); if(pt){ var bb=tabsEl.querySelector('[data-t="'+t+'"]'); if(bb) pt.textContent=bb.getAttribute('aria-label') }
-    try{localStorage.setItem('rec_tab',t)}catch(x){} window.scrollTo(0,0) }
+    try{localStorage.setItem('rec_tab',t)}catch(x){} window.scrollTo(0,0); posInd(true) }
+  function posInd(anim){ var on=tabsEl.querySelector('button.on'); if(!on) return; tabsEl.style.setProperty('--ix',on.offsetLeft+'px'); tabsEl.style.setProperty('--iw',on.offsetWidth+'px'); tabsEl.style.setProperty('--ih',on.offsetHeight+'px'); tabsEl.style.setProperty('--iy',on.offsetTop+'px');
+    if(anim){ tabsEl.classList.remove('liq'); void tabsEl.offsetWidth; tabsEl.classList.add('liq'); clearTimeout(posInd._t); posInd._t=setTimeout(function(){ tabsEl.classList.remove('liq') },650) } }
+  window.addEventListener('resize',function(){ posInd(false) }); setTimeout(function(){ posInd(false) },60); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ posInd(false) });
   tabsEl.addEventListener('click',function(ev){ var b=ev.target.closest('button'); if(b) setTab(b.getAttribute('data-t')) });
   var t0='mood'; try{ var sv=localStorage.getItem('rec_tab'); if(sv&&(sv==='mood'||panes[sv])) t0=sv }catch(x){} setTab(t0); ui();
   if(window.claude&&window.claude.use){
@@ -1072,4 +1111,5 @@ load();
 })();
 </script>
 
-</body></html>
+</body>
+</html>
