@@ -544,6 +544,13 @@ header .panel .tabs button.on{z-index:10}
   header .panel .tabs{left:16px;right:16px;top:12px;width:auto;border:1px solid rgba(255,255,255,.14);border-radius:28px;padding:8px 14px}
   body{padding-top:92px}
 }
+
+/* tomas y check dentro del pie, ya no tapan el clip */
+.card .cap{min-height:50px;padding-right:12px}
+.card .cap .esc{padding-right:96px;min-height:30px;display:flex;align-items:center}
+.card .cap .chk,.card .cap .tom{position:absolute;right:10px;top:10px;bottom:auto;z-index:5}
+.card .cap .chk{width:34px;height:34px;font-size:17px}
+.card .cap .tom{min-height:30px;padding:0 12px;font-size:.76rem;border-width:1px}
 </style>
 </head>
 <body>
@@ -979,11 +986,11 @@ function render(){
     }
     var n=document.createElement('span'); n.className='num'; n.textContent=c.n; vid.appendChild(n);
     if(c.eq.length){var eq=document.createElement('span'); eq.className='eq'; c.eq.forEach(function(x){var i2=document.createElement('i'); i2.textContent=x; eq.appendChild(i2)}); var eqEl=eq}
-    if(c.meta>1){ var tm=document.createElement('span'); tm.className='tom'; tm.textContent=tomText(c)+' tomas'; tm.style.setProperty('--p',Math.min(100,Math.round(nTom(c)/c.meta*100))+'%'); if(isDone(c)) tm.classList.add('full'); vid.appendChild(tm) } else {
+    if(c.meta>1){ var tm=document.createElement('span'); tm.className='tom'; tm.textContent=tomText(c)+' tomas'; tm.style.setProperty('--p',Math.min(100,Math.round(nTom(c)/c.meta*100))+'%'); if(isDone(c)) tm.classList.add('full'); var ctl=tm } else {
     var chk=document.createElement('button'); chk.type='button'; chk.className='chk'; chk.innerHTML=CK; chk.setAttribute('aria-pressed',!!done[c.id]); chk.setAttribute('aria-label',(done[c.id]?'Quitar grabado: ':'Marcar grabado: ')+c.eti);
     chk.addEventListener('click',function(ev){ev.stopPropagation(); setDone(c,!done[c.id])});
     chk.addEventListener('keydown',function(ev){ev.stopPropagation()});
-    vid.appendChild(chk);
+    var ctl=chk;
     }
     if(c.ia){var it=document.createElement('span'); it.className='iatag'; it.textContent='BASE IA'; var itEl=it; if(done[c.id+'~ia']) card.classList.add('iaok')}
     var cap=document.createElement('div'); cap.className='cap';
@@ -994,6 +1001,7 @@ function render(){
       chips.slice(0,MAXC).forEach(function(x){ var i3=document.createElement('i'); i3.className='ch '+x[1]; i3.textContent=x[0]; tg.appendChild(i3) });
       if(chips.length>MAXC){ var mo=document.createElement('i'); mo.className='ch mo'; mo.textContent='+'+(chips.length-MAXC); mo.title=chips.slice(MAXC).map(function(x){return x[0]}).join(', '); tg.appendChild(mo) }
       cap.appendChild(tg) }
+    if(ctl) cap.appendChild(ctl);
     card.appendChild(vid); card.appendChild(cap);
     var open=function(){openViewer(i)};
     card.addEventListener('click',open);
