@@ -471,20 +471,36 @@ header .panel .tabs button.on{z-index:10}
 .exgrid.vert .exc video{aspect-ratio:auto}
 .exc .lk{min-height:120px}
 @media (max-width:899px){ .dstep{padding:7px 8px;gap:6px} .dn{width:20px;height:20px;font-size:.7rem} .dt b{font-size:.78rem!important;line-height:1.1;overflow-wrap:anywhere} .dt em{font-size:.66rem} }
-/* ===== Panel flotante de celular: solo texto, con Finalizado e isotipo ===== */
-@media (max-width:899px){
-  header .panel .tabs{max-width:520px;gap:2px;padding:6px}
-  header .panel .tabs button[data-t] svg{display:none!important}
-  header .panel .tabs button[data-t]{flex:1 1 auto;min-width:0;flex-direction:row;font-size:.7rem;letter-spacing:-.02em;white-space:nowrap;padding:0 6px;min-height:46px}
-  @media (max-width:380px){header .panel .tabs button[data-t],header .panel .tabs .finbtn{font-size:.64rem;padding:0 4px!important}header .panel .tabs{padding:5px;gap:0}}
-  header .panel .tabs button[data-t] span{font-size:inherit}
-  header .panel .tabs button[data-t].on{background:transparent;color:#000}
-  header .panel .tabs .finbtn{display:flex!important;flex:1 1 auto;min-width:0;margin:0!important;min-height:46px;padding:0 6px;border-radius:20px;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;white-space:nowrap;background:transparent;border:0;color:rgba(255,255,255,.38);opacity:1;box-shadow:none}
+/* ===== Panel flotante de escritorio: solo texto, con Finalizado e isotipo ===== */
+@media (min-width:900px){
+  header .panel{padding:0;margin:0;min-height:0;height:0;border:0;background:none;box-shadow:none}
+  header .panel h1{display:none}
+  header .panel .tabs{position:fixed;left:0;right:0;bottom:24px;width:max-content;max-width:calc(100vw - 48px);margin:0 auto;padding:7px;display:flex;align-items:stretch;gap:4px;background:rgba(17,17,17,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:28px;box-shadow:0 12px 34px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.35);overflow:visible;z-index:60}
+  header .panel .tabs button svg{display:none!important}
+  header .panel .tabs button[data-t],header .panel .tabs button[data-t].on,header .panel .tabs button[data-t]:first-child{position:relative;z-index:1;flex:1 1 auto;min-height:46px;margin:0;padding:0 24px;border:0;border-radius:22px;background:transparent;color:rgba(255,255,255,.66);font-weight:800;font-size:.92rem;white-space:nowrap;box-shadow:none;filter:none;transition:color .2s}
+  header .panel .tabs button[data-t]:hover{color:#fff;filter:none}
+  header .panel .tabs button[data-t].on{color:#000}
+  header .panel .tabs button.on::before,header .panel .tabs button.on::after{content:none!important}
+  header .panel .tabs::before{content:'';position:absolute;left:0;top:0;width:var(--iw,0);height:var(--ih,0);transform:translate(var(--ix,0),var(--iy,0));border-radius:22px;background:var(--yel);box-shadow:0 0 18px rgba(245,212,0,.55),0 0 4px rgba(245,212,0,.6);transition:transform .55s cubic-bezier(.34,1.45,.5,1),width .55s cubic-bezier(.34,1.45,.5,1),height .3s;z-index:0;pointer-events:none}
+  header .panel .tabs.liq::before{animation:liqsq .55s ease-in-out}
+  header .panel .tabs .finbtn{display:flex!important;position:relative;z-index:1;flex:1 1 auto;margin:0!important;min-height:46px;padding:0 22px;border-radius:22px;align-items:center;justify-content:center;font-size:.92rem;font-weight:800;white-space:nowrap;background:transparent;border:0;color:rgba(255,255,255,.38);opacity:1;box-shadow:none}
   header .panel .tabs .finbtn:not(:disabled){background:#22c55e;color:#04210f;box-shadow:0 0 16px rgba(34,197,94,.5),0 0 2px rgba(34,197,94,.8)}
-  header .panel .tabs .gearbtn{display:flex;flex:0 0 36px;margin:0!important;min-height:46px;padding:0!important;min-width:0;align-items:center;justify-content:center;border-radius:20px;background:transparent;border:0}
-  header .panel .tabs .gearbtn svg{display:block!important;width:16px;height:auto;max-height:26px}
-  header .panel .tabs .finbtn{margin-left:0}
+  header .panel .tabs .gearbtn{position:relative;z-index:1;display:flex;flex:0 0 52px;margin:0!important;min-height:46px;padding:0!important;align-items:center;justify-content:center;border-radius:22px;background:transparent;border:0}
+  header .panel .tabs .gearbtn svg{display:block!important;width:18px;height:auto;max-height:30px}
+  .mbbar,.tab-exp .mbbar{border-radius:22px}
+  .tab-exp .mbbar{display:none}
+  body{padding-bottom:110px}
 }
+
+/* subpestañas de Reels */
+.subtabs{display:flex;gap:8px;padding:12px 12px 4px;max-width:2000px;margin:0 auto}
+.subtabs button{min-height:40px;padding:0 18px;border-radius:999px;border:1px solid var(--faint);background:transparent;color:var(--dim);font-weight:800;font-size:.9rem;cursor:pointer}
+.subtabs button.on{background:var(--yellow);border-color:var(--yellow);color:#000;box-shadow:0 0 16px rgba(245,212,0,.42),0 0 2px rgba(245,212,0,.8)}
+.qpane{max-width:900px;margin:0 auto;padding:0 0 28px}
+.qlist{list-style:none;margin:6px 16px 0;padding:0;counter-reset:q;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:8px}
+.qlist li{counter-increment:q;display:flex;gap:10px;align-items:flex-start;background:var(--raise);border:1px solid var(--faint);border-radius:14px;padding:12px 14px;font-weight:600;line-height:1.3}
+.qlist li:before{content:counter(q);flex:none;min-width:24px;height:24px;border-radius:7px;background:var(--yellow);color:#000;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.trpane[hidden],.qpane[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -1120,8 +1136,26 @@ load();
 })();
 
 (function(){ var mq=window.matchMedia('(max-width:899px)'), panel=document.querySelector('.panel'), tools=document.querySelector('.tools'), seg=document.getElementById('seg'), g=document.getElementById('gearbtn'), f=document.getElementById('finbtn');
-  var tb=document.getElementById('tabs'); function place(){ if(mq.matches){ tb.appendChild(f); tb.appendChild(g) } else { panel.appendChild(f); panel.appendChild(g) } if(window.posInd) window.posInd(false) }
+  var tb=document.getElementById('tabs'); function place(){ if(mq.matches){ tools.insertBefore(f,seg); seg.insertAdjacentElement('afterend',g) } else { tb.appendChild(f); tb.appendChild(g) } if(window.posInd) window.posInd(false) }
   place(); if(mq.addEventListener) mq.addEventListener('change',place); else if(mq.addListener) mq.addListener(place);
+})();
+
+/* ---- Reels: subpestañas Entrevistas / Trends ---- */
+(function(){
+  var m=document.getElementById('t-reel'); if(!m) return;
+  var Q=['¿Cómo te llamas y cuántos años tienes?','¿Cómo te sentiste al cruzar la meta?','¿Era tu primera vez en una carrera de 10K?','¿Cuánto tiempo llevas entrenando en el gym?','¿Qué te motivó a venir hoy?','¿Cómo te preparaste esta semana?','¿Qué fue lo más difícil de hoy?','¿En qué momento quisiste parar?','¿Qué canción te acompañó?','¿Con quién viniste?','¿Cuál es tu rutina favorita en el gym?','¿Qué es lo mejor de entrenar en Hangar?','¿Qué desayunaste hoy?','¿Qué es lo primero que vas a comer?','¿Cómo describirías el ambiente en una palabra?','¿Qué le dirías a alguien que nunca ha corrido?','¿Qué meta tienes para este año?','¿Te gustaría otra carrera así?','¿Qué te gustaría ver en el próximo evento?','¿Qué te llevas de hoy?'];
+  var bar=document.createElement('div'); bar.className='subtabs'; bar.setAttribute('role','tablist');
+  var pane=document.createElement('section'); pane.className='qpane';
+  var h=document.createElement('div'); h.className='exhead'; h.innerHTML='<div><h2>Entrevistas</h2><p>20 preguntas cortas para platicar con los corredores. No todo es la carrera: cómo la pasaron, su experiencia y si quieren más.</p></div>';
+  var ol=document.createElement('ol'); ol.className='qlist'; Q.forEach(function(q){ var li=document.createElement('li'); li.textContent=q; ol.appendChild(li) });
+  pane.appendChild(h); pane.appendChild(ol);
+  var parts=[].slice.call(m.children); var trend=document.createElement('div'); trend.className='trpane'; parts.forEach(function(c){ trend.appendChild(c) });
+  var hh=trend.querySelector('.exhead h2'); if(hh) hh.textContent='Trends'; var hp=trend.querySelector('.exhead p'); if(hp) hp.textContent='Trends y reels de referencia para replicar.';
+  m.appendChild(bar); m.appendChild(pane); m.appendChild(trend);
+  var cur='ent';
+  [['ent','Entrevistas'],['tr','Trends']].forEach(function(x){ var b=document.createElement('button'); b.type='button'; b.setAttribute('role','tab'); b.dataset.s=x[0]; b.textContent=x[1]; b.addEventListener('click',function(){ cur=x[0]; sync() }); bar.appendChild(b) });
+  function sync(){ pane.hidden=cur!=='ent'; trend.hidden=cur!=='tr'; [].forEach.call(bar.children,function(b){ var on=b.dataset.s===cur; b.classList.toggle('on',on); b.setAttribute('aria-selected',String(on)) }) }
+  sync();
 })();
 </script>
 
