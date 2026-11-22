@@ -551,6 +551,14 @@ header .panel .tabs button.on{z-index:10}
 .card .cap .chk,.card .cap .tom{position:absolute;right:10px;top:10px;bottom:auto;z-index:5}
 .card .cap .chk{width:34px;height:34px;font-size:17px}
 .card .cap .tom{min-height:30px;padding:0 12px;font-size:.76rem;border-width:1px}
+
+/* tomas y check en beige */
+.card .cap .tom{background:#ece2cc;border-color:#ece2cc;color:#16120a}
+.card .cap .tom:before{background:#cdbd96}
+.card .cap .tom.full{background:var(--yellow);border-color:var(--yellow);color:#000}
+.card .cap .chk{background:#ece2cc;border-color:#ece2cc;color:transparent}
+.card .cap .chk:hover{border-color:#fff}
+.card.done .cap .chk{background:var(--yellow);border-color:var(--yellow);color:#000}
 </style>
 </head>
 <body>
@@ -642,7 +650,7 @@ Mattias_Russo-Larsson_-_Collage.gif,Carrera · salida|Carrera · vuelta,Collage 
 (function(){
 'use strict';
 var CSV='clips.csv', DIR='clips/';
-var GEAR=[{o:'Ruz',k:'ZV-E10',n:'Sony ZV-E10',d:'Lente 11 mm, con estabilizador'},{o:'Juan Corzo',k:'Canon',n:'Canon',d:'Modelo y lente pendientes'},{o:'Juan Corzo',k:'Action 5',n:'DJI Action 5',d:'Cámara de acción'},{o:'Juan Corzo',k:'Brazo mágico',n:'Brazo mágico',d:'Pequeño, unos 10 cm cada parte. Solo para tomas con botellas u objetos'},{o:'Juan Corzo',k:'Tripié',n:'Tripié',d:'Lo lleva Juan Corzo'},{o:'Vima',k:'a6700',n:'Sony a6700 (confirmar)',d:'Con filtro ND'},{o:'Vima',k:'Osmo 360',n:'DJI Osmo 360',d:'Cámara 360'}];
+var GEAR=[{o:'Ruz',k:'ZV-E10',n:'Sony ZV-E10',d:'Lente 11 mm, con estabilizador'},{o:'Juan Corzo',k:'Canon',n:'Canon (modelo por confirmar)',d:'Lentes: 24-50 mm, 85-300 mm y 50 mm'},{o:'Juan Corzo',k:'Action 5',n:'DJI Action 5',d:'Cámara de acción'},{o:'Juan Corzo',k:'Brazo mágico',n:'Brazo mágico',d:'Pequeño, unos 10 cm cada parte. Solo para tomas con botellas u objetos'},{o:'Juan Corzo',k:'Tripié',n:'Tripié',d:'Lo lleva Juan Corzo'},{o:'Vima',k:'a6700',n:'Sony a6700 (confirmar)',d:'Con filtro ND'},{o:'Vima',k:'Osmo 360',n:'DJI Osmo 360',d:'Cámara 360'}];
 var mode='loop'; try{ if(localStorage.getItem('rec_mode')==='one') mode='one' }catch(e){}
 var CK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>', media={}, assetsApi=null, clips=[], shown=[], query='', est='Todos', grp='', F={}, done={}, store=null, dirty=false, cardsById={};
 var grid=document.getElementById('grid'), emptyEl=document.getElementById('empty'),
