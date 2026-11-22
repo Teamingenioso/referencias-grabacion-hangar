@@ -523,9 +523,10 @@ header .panel .tabs button.on{z-index:10}
 
 /* etiquetas y pie flotantes: ya no tapan el clip */
 .card{background:transparent;overflow:visible}
-.card .vid{border-radius:12px;overflow:hidden;background:#000}
-.card .cap{position:relative;left:auto;right:auto;bottom:auto;margin:10px 4px 0;border-radius:14px;background:#000;border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 20px rgba(0,0,0,.45);padding:9px 11px 10px;z-index:4}
+.card .vid{border-radius:12px 12px 0 0;overflow:hidden;background:#000}
+.card .cap{position:relative;left:auto;right:auto;bottom:auto;margin:0;border-radius:0 0 14px 14px;background:#000;border:1px solid rgba(255,255,255,.12);border-top:0;box-shadow:0 8px 20px rgba(0,0,0,.45);padding:9px 11px 10px;z-index:4}
 .card .chk,.card .tom{bottom:8px}
+.card .cap{box-shadow:none}
 .ctags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;align-items:center}
 .ctags .eq{position:static;display:contents}
 .ctags .eq i{font-size:.6rem;padding:3px 8px}
