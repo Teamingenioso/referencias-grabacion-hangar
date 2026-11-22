@@ -1,9 +1,3 @@
-<!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0a0a0a">
 
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="theme-color" content="#0a0a0a">
@@ -563,7 +557,6 @@ header .panel .tabs button.on{z-index:10}
 </head>
 <body>
 
-
 <header>
   <div class="bar">
   <div class="panel">
@@ -645,6 +638,7 @@ David_Aufdembrinke_-_Dolly.gif,Calentamiento|Carrera · salida|Carrera · vuelta
 Alex_Hulsey_-_Fast_Motion.gif,Carrera · salida|Carrera · meta|After running · Espacio de fotos|After running · Comida|After running · Premiación|After running · Casita de Bad Bunny,Timelapse · Ángulo alto,"Timelapse desde un ángulo alto, donde se vea a la gente moviéndose. Mínimo 5 clips, cada uno en un espacio diferente del evento.",Fast motion,Gente moviéndose vista desde arriba,,,Timelapse|Ángulo alto,,,,,5,
 Jessy_Busgeeth_-_Collage.gif,Carrera · salida|Carrera · vuelta|Carrera · meta,Collage,"Alguien corriendo, grabado desde la parte de la carrera, ya sea a la mitad o en la meta. Un solo clip, grabado con baja obturación.",Collage,Corriendo,,,5K|10K|Baja obturación,,,,Quien esté en la carrera (5K o 10K),1,Entrada · salida · meta (filmmakers 1 y 2)|Vuelta (filmmaker 3)
 Mattias_Russo-Larsson_-_Collage.gif,Carrera · salida|Carrera · vuelta,Collage · fotos al azar,"Fotos al azar en varios puntos, al inicio o a la mitad de la carrera, para tener este resultado.",Collage,Se toma fotos en distintos lugares,Canon,,,,,,Juan Corzo,10,
+
 </script>
 <script>
 (function(){
@@ -1134,7 +1128,8 @@ load();
   var GAL=[
     {k:'exp',col:'explora',name:'Explora',desc:'Videos completos de cómo quedan los mejores resultados.',accept:'video/*,image/*',multi:false,add:'Agregar video',empty:'Aún no hay videos aquí.'},
     {k:'car',col:'carruseles',name:'Carruseles',desc:'Carruseles de referencia. Desliza para ver cada lámina.',accept:'image/*',multi:true,add:'Agregar carrusel',empty:'Aún no hay carruseles aquí.'},
-    {k:'reel',col:'reels',name:'Reels',desc:'Reels de referencia para replicar.',accept:'video/*',multi:false,add:'Agregar reel',empty:'Aún no hay reels aquí.',vertical:true}
+    {k:'reel',col:'reels',name:'Reels',desc:'Reels de referencia para replicar.',accept:'video/*',multi:false,add:'Agregar reel',empty:'Aún no hay reels aquí.',vertical:true},
+    {k:'ent',col:'entrevistas',name:'Videos de entrevistas',desc:'Ejemplos de entrevistas para replicar.',accept:'video/*',multi:false,add:'Agregar video',empty:'Aún no hay videos aquí.',vertical:true}
   ];
   var tabsEl=document.getElementById('tabs'), mood=document.getElementById('mood'), host=document.getElementById('gals'), st=null, api=null, panes={};
   function safe(u){ return /^(https:\/\/|\/_blob\/)/.test(u||'')?u:'' }
@@ -1183,7 +1178,7 @@ load();
       c.appendChild(d); grid.appendChild(c) });
   }
   function ui(){ GAL.forEach(paint) }
-  function setTab(t){ mood.hidden=t!=='mood'; GAL.forEach(function(g){ g.main.hidden=g.k!==t }); document.body.classList.toggle('tab-exp',t!=='mood');
+  function setTab(t){ mood.hidden=t!=='mood'; GAL.forEach(function(g){ g.main.hidden=(g.k==='ent')?(t!=='reel'):(g.k!==t) }); document.body.classList.toggle('tab-exp',t!=='mood');
     [].forEach.call(tabsEl.querySelectorAll('button[data-t]'),function(b){ var on=b.getAttribute('data-t')===t; b.classList.toggle('on',on); b.setAttribute('aria-selected',String(on)) });
     var pt=document.getElementById('ptitle'); if(pt){ var bb=tabsEl.querySelector('[data-t="'+t+'"]'); if(bb) pt.textContent=bb.getAttribute('aria-label') }
     try{localStorage.setItem('rec_tab',t)}catch(x){} window.scrollTo(0,0); posInd(true) }
@@ -1212,7 +1207,7 @@ load();
   var pane=document.createElement('section'); pane.className='qpane';
   var h=document.createElement('div'); h.className='exhead'; h.innerHTML='<div><h2>Entrevistas</h2><p>20 preguntas cortas para platicar con los corredores. No todo es la carrera: cómo la pasaron, su experiencia y si quieren más.</p></div>';
   var ol=document.createElement('ol'); ol.className='qlist'; Q.forEach(function(q){ var li=document.createElement('li'); li.textContent=q; ol.appendChild(li) });
-  pane.appendChild(h); pane.appendChild(ol);
+  pane.appendChild(h); var ge=document.getElementById('t-ent'); if(ge){ ge.hidden=false; pane.appendChild(ge) } var qh=document.createElement('div'); qh.className='exhead'; qh.innerHTML='<div><h2>Preguntas</h2></div>'; pane.appendChild(qh); pane.appendChild(ol);
   var parts=[].slice.call(m.children); var trend=document.createElement('div'); trend.className='trpane'; parts.forEach(function(c){ trend.appendChild(c) });
   var hh=trend.querySelector('.exhead h2'); if(hh) hh.textContent='Trends'; var hp=trend.querySelector('.exhead p'); if(hp) hp.textContent='Trends y reels de referencia para replicar.';
   m.appendChild(bar); m.appendChild(pane); m.appendChild(trend);
