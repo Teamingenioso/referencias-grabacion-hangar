@@ -520,6 +520,16 @@ header .panel .tabs button.on{z-index:10}
 .qlist li{counter-increment:q;display:flex;gap:10px;align-items:flex-start;background:var(--raise);border:1px solid var(--faint);border-radius:14px;padding:12px 14px;font-weight:600;line-height:1.3}
 .qlist li:before{content:counter(q);flex:none;min-width:24px;height:24px;border-radius:7px;background:var(--yellow);color:#000;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
 .trpane[hidden],.qpane[hidden]{display:none}
+
+/* etiquetas y pie flotantes: ya no tapan el clip */
+.card{background:transparent;overflow:visible}
+.card .vid{border-radius:12px;overflow:hidden;background:#000}
+.card .cap{position:relative;left:auto;right:auto;bottom:auto;margin:-14px 8px 0;border-radius:14px;background:rgba(18,18,18,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 20px rgba(0,0,0,.45);padding:9px 11px 10px;z-index:4}
+.card .chk,.card .tom{bottom:22px}
+.ctags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;align-items:center}
+.ctags .eq{position:static;display:contents}
+.ctags .eq i{font-size:.6rem;padding:3px 8px}
+.ctags .iatag{position:static;font-size:.6rem}
 </style>
 </head>
 <body>
@@ -954,17 +964,18 @@ function render(){
       var nv=document.createElement('div'); nv.className='nov'; var b1=document.createElement('b'); b1.textContent=c.tec||c.eti; var s1=document.createElement('span'); s1.textContent=/eyecan+dy/i.test(host(c.link))?'Eyecandy':'Referencia por enlace'; nv.appendChild(b1); nv.appendChild(s1); vid.appendChild(nv);
     }
     var n=document.createElement('span'); n.className='num'; n.textContent=c.n; vid.appendChild(n);
-    if(c.eq.length){var eq=document.createElement('span'); eq.className='eq'; c.eq.forEach(function(x){var i2=document.createElement('i'); i2.textContent=x; eq.appendChild(i2)}); vid.appendChild(eq)}
+    if(c.eq.length){var eq=document.createElement('span'); eq.className='eq'; c.eq.forEach(function(x){var i2=document.createElement('i'); i2.textContent=x; eq.appendChild(i2)}); var eqEl=eq}
     if(c.meta>1){ var tm=document.createElement('span'); tm.className='tom'; tm.textContent=tomText(c)+' tomas'; tm.style.setProperty('--p',Math.min(100,Math.round(nTom(c)/c.meta*100))+'%'); if(isDone(c)) tm.classList.add('full'); vid.appendChild(tm) } else {
     var chk=document.createElement('button'); chk.type='button'; chk.className='chk'; chk.innerHTML=CK; chk.setAttribute('aria-pressed',!!done[c.id]); chk.setAttribute('aria-label',(done[c.id]?'Quitar grabado: ':'Marcar grabado: ')+c.eti);
     chk.addEventListener('click',function(ev){ev.stopPropagation(); setDone(c,!done[c.id])});
     chk.addEventListener('keydown',function(ev){ev.stopPropagation()});
     vid.appendChild(chk);
     }
-    if(c.ia){var it=document.createElement('span'); it.className='iatag'; it.textContent='BASE IA'; vid.appendChild(it); if(done[c.id+'~ia']) card.classList.add('iaok')}
+    if(c.ia){var it=document.createElement('span'); it.className='iatag'; it.textContent='BASE IA'; var itEl=it; if(done[c.id+'~ia']) card.classList.add('iaok')}
     var cap=document.createElement('div'); cap.className='cap';
     var s=document.createElement('span'); s.className='esc'; s.textContent=c.tec||c.esc||c.eti; cap.appendChild(s);
     if(c.from!=null){var r=document.createElement('span'); r.className='rng'; r.textContent='Tramo '+fmt(c.from)+' a '+fmt(c.to); cap.appendChild(r)}
+    if(typeof eqEl!=='undefined'&&c.eq.length||typeof itEl!=='undefined'&&c.ia){ var tg=document.createElement('div'); tg.className='ctags'; if(c.ia&&itEl) tg.appendChild(itEl); if(c.eq.length&&eqEl) tg.appendChild(eqEl); cap.appendChild(tg) }
     card.appendChild(vid); card.appendChild(cap);
     var open=function(){openViewer(i)};
     card.addEventListener('click',open);
